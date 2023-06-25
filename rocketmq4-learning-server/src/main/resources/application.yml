@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: test
+  application:
+    name: rocketmq4-learning-server
+
+server:
+  port: 9793
+  servlet:
+    context-path: /rocketmq4-learning-server
+
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: false
+  helperDialect: mysql
+  params: count=countSql
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.courage.rocketmq4.domain.po
+
