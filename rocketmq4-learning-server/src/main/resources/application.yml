@@ -5,7 +5,7 @@ spring:
     name: rocketmq4-learning-server
 
 server:
-  port: 9793
+  port: 8080
   servlet:
     context-path: /rocketmq4-learning-server
 
