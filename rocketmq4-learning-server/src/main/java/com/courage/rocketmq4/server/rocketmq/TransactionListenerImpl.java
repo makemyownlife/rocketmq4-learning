@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
+ * 事务监听器
  * Created by zhangyong on 2023/7/5.
  */
 @Component
