@@ -1,6 +1,7 @@
 package com.courage.rocketmq4.server.rocketmq;
 
 import org.apache.rocketmq.client.producer.TransactionListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RocketMQConfig {
 
-    private TransactionListener transactionListener = new TransactionListenerImpl();
+    @Autowired
+    private TransactionListener transactionListener;
+
 
 }
