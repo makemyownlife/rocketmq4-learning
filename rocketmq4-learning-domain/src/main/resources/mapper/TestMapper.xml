@@ -3,7 +3,7 @@
 <mapper namespace="com.courage.rocketmq4.domain.mapper.TestMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.courage.rocketmq4.domain.po.TestPo">
+    <resultMap id="BaseResultMap" type="com.courage.rocketmq4.domain.po.TestPO">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>

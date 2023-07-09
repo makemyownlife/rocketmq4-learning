@@ -2,18 +2,22 @@ package com.courage.rocketmq4.domain.po;
 
 import java.util.Date;
 
-public class TestPo {
+/**
+ * Created by zhangyong on 2023/7/9.
+ */
+public class OrderPO {
 
     private Long id;
 
-    private String username;
+    private Long userId;
 
-    private String password;
+    private Integer orderStatus;
 
     private Date createTime;
 
     private Date updateTime;
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -22,20 +26,20 @@ public class TestPo {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Date getCreateTime() {
