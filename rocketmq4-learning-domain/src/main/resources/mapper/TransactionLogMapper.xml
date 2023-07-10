@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.courage.rocketmq4.domain.mapper.TransactionLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.courage.rocketmq4.domain.po.TransactionLogPO">
+        <id column="id" property="id" />
+        <result column="biz_id" property="bizId" />
+        <result column="biz_type" property="bizType" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.courage.rocketmq4.domain.po.TransactionLogPO">
+        INSERT INTO t_transaction_log (id, biz_id, biz_type, create_time)
+        VALUES (#{id}, #{bizId}, #{bizType}, #{createTime})
+    </insert>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="String">
+        SELECT id, biz_id, biz_type, create_time
+        FROM t_transaction_log
+        WHERE id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.courage.rocketmq4.domain.po.TransactionLogPO">
+        UPDATE t_transaction_log
+        SET biz_id = #{bizId}, biz_type = #{bizType}, create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM t_transaction_log
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

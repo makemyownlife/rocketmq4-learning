@@ -26,10 +26,11 @@ public class OrderService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void createOrder(OrderPO orderPO) {
+    public void createOrder(OrderPO orderPO, String transactionId) {
         // 插入到订单表
         orderMapper.insert(orderPO);
         // 插入到事务日志表
+        
     }
 
 }

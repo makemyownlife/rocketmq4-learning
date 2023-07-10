@@ -4,7 +4,7 @@ BIN_DIR=`pwd`
 cd ..
 DEPLOY_DIR=`pwd`
 CONF_DIR=$DEPLOY_DIR/conf
-SERVER_NAME="rocketmq4-learning-server"
+SERVER_NAME="rocketmq4-learning-producer"
 PIDS=`ps -f | grep java | grep "$CONF_DIR" | awk '{print $2}'`
 if [ -n "$PIDS" ]; then
     echo "ERROR: The $SERVER_NAME already started!"
@@ -44,7 +44,7 @@ else
     JAVA_MEM_OPTS=" -server -Xms1g -Xmx1g -XX:PermSize=128m -XX:SurvivorRatio=2 -XX:+UseParallelGC "
 fi
 
-APP_ENTER="com.courage.rocketmq4.server.MainApplication"
+APP_ENTER="com.courage.rocketmq4.producer.MainApplication"
 echo -e "Starting the service ...\c"
 nohup java $JAVA_OPTS $JAVA_MEM_OPTS $JAVA_DEBUG_OPTS $JAVA_JMX_OPTS -classpath $CONF_DIR:$LIB_JARS $APP_ENTER > $STDOUT_FILE 2>&1 &
 
