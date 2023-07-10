@@ -3,8 +3,6 @@ package com.courage.rocketmq4.server.rocketmq;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.TransactionListener;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
-import org.apache.rocketmq.client.producer.TransactionSendResult;
-import org.apache.rocketmq.common.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +32,8 @@ public class RocketMQConfig {
             new ThreadPoolExecutor(
                     CORE_POOL_SIZE,
                     MAXIMUM_POOL_SIZE,
-                    KEEP_ALIVE_TIME, TimeUnit.SECONDS,
+                    KEEP_ALIVE_TIME,
+                    TimeUnit.SECONDS,
                     new ArrayBlockingQueue<>(100));
 
     @Autowired
@@ -50,5 +49,5 @@ public class RocketMQConfig {
         producer.start();
         return producer;
     }
-    
+
 }
