@@ -13,7 +13,7 @@ public interface OrderMapper {
 
     OrderPO getById(Long id);
 
-    void update(OrderPO order);
+    int update(OrderPO order);
 
     void delete(Long id);
 

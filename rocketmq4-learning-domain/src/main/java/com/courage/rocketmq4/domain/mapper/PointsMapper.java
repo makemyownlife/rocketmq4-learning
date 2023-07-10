@@ -1,6 +1,5 @@
 package com.courage.rocketmq4.domain.mapper;
 
-import com.courage.rocketmq4.domain.po.OrderPO;
 import com.courage.rocketmq4.domain.po.PointsPO;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +11,7 @@ public interface PointsMapper {
 
     void insert(PointsPO pointsPO);
 
-    OrderPO getById(Long id);
+    PointsPO getById(Long id);
 
     void update(PointsPO order);
 

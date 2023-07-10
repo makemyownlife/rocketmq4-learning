@@ -24,7 +24,7 @@
 
     <update id="update" parameterType="com.courage.rocketmq4.domain.po.OrderPO">
         UPDATE t_order
-        SET user_id = #{userId}, order_status = #{orderStatus}, create_time = #{createTime}, update_time = #{updateTime}
+        SET order_status = #{orderStatus}, update_time = #{updateTime}
         WHERE id = #{id}
     </update>
 
