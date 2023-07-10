@@ -17,7 +17,7 @@ public class RocketMQConfig {
     private final static String ORDER_POINT_CONSUMER_GROUP = "orderPointConsumerGroup";
 
     @Autowired
-    private OrderPointConsumer orderPointConsumer;
+    private OrderPointMessageListener orderPointMessageListener;
 
     @Bean
     public DefaultMQPushConsumer createTransactionProducer() throws MQClientException {
@@ -25,7 +25,7 @@ public class RocketMQConfig {
         pushConsumer.setNamesrvAddr("127.0.0.1:9876");
         pushConsumer.setConsumeMessageBatchMaxSize(1);
         pushConsumer.subscribe("order-topic", "*");
-        pushConsumer.registerMessageListener(orderPointConsumer);
+        pushConsumer.registerMessageListener(orderPointMessageListener);
         pushConsumer.start();
         return pushConsumer;
     }

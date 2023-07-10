@@ -22,9 +22,9 @@ import java.util.List;
  * Created by zhangyong on 2023/7/8.
  */
 @Component
-public class OrderPointConsumer implements MessageListenerConcurrently {
+public class OrderPointMessageListener implements MessageListenerConcurrently {
 
-    private final Logger logger = LoggerFactory.getLogger(OrderPointConsumer.class);
+    private final Logger logger = LoggerFactory.getLogger(OrderPointMessageListener.class);
 
     @Autowired
     private PointsMapper pointsMapper;
