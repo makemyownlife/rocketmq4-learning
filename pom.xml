@@ -13,7 +13,8 @@
     <modules>
         <module>rocketmq4-learning-service</module>
         <module>rocketmq4-learning-domain</module>
-        <module>rocketmq4-learning-server</module>
+        <module>rocketmq4-learning-producer</module>
+        <module>rocketmq4-learning-consumer</module>
         <module>rocketmq4-learning-common</module>
     </modules>
 

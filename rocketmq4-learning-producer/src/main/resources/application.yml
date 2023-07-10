@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: test
+  application:
+    name: rocketmq4-learning-producer
+
+server:
+  port: 8080
+  servlet:
+    context-path: /rocketmq4-learning-producer
+
+pagehelper:
+  supportMethodsArguments: true
+  reasonable: false
+  helperDialect: mysql
+  params: count=countSql
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.courage.rocketmq4.domain.po
+

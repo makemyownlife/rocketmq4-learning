@@ -30,7 +30,6 @@ public class OrderService {
         // 插入到订单表
         orderMapper.insert(orderPO);
         // 插入到事务日志表
-
     }
 
 }
