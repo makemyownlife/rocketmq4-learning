@@ -56,7 +56,7 @@ public class TransactionListenerImpl implements TransactionListener {
             }
         } catch (Exception e) {
             logger.error("checkLocalTransaction error:", e);
-            localTransactionState = LocalTransactionState.ROLLBACK_MESSAGE;
+            localTransactionState = LocalTransactionState.UNKNOW;
         }
         logger.info("检测本地事务，事务编号：" + transactionId + " 事务状态：" + localTransactionState);
         return localTransactionState;
