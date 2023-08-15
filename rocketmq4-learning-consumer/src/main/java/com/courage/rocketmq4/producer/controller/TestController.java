@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.server.controller;
+package com.courage.rocketmq4.producer.controller;
 
 import com.courage.rocketmq4.common.result.ResponseEntity;
 import io.swagger.annotations.Api;

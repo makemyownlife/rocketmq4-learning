@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.server.config;
+package com.courage.rocketmq4.producer.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

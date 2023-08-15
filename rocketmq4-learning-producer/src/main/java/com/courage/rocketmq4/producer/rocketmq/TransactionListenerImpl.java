@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.server.rocketmq;
+package com.courage.rocketmq4.producer.rocketmq;
 
 import com.alibaba.fastjson.JSON;
 import com.courage.rocketmq4.domain.po.OrderPO;
