@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.server;
+package com.courage.rocketmq4.producer;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
