@@ -5,21 +5,23 @@ package com.courage.rocketmq4.domain.po;
  */
 public class ProductPo {
 
-    private String id;
+    private Integer id;
+
     private String name;
+
     private int price;
 
     public ProductPo() {
 
     }
 
-    public ProductPo(String id, String name, int price) {
+    public ProductPo(Integer id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -31,7 +33,7 @@ public class ProductPo {
         return price;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

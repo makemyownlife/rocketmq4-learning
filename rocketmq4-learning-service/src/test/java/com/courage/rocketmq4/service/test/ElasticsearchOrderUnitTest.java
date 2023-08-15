@@ -1,7 +1,9 @@
 package com.courage.rocketmq4.service.test;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.IndexRequest;
+import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
+import co.elastic.clients.elasticsearch.core.bulk.UpdateAction;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -19,21 +21,27 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangyong on 2023/8/15.
  */
 public class ElasticsearchOrderUnitTest {
 
+    private ElasticsearchClient esClient;
+
     @Test
-    public void useUsernameAndPasswordHttps() throws IOException {
-        SSLFactory sslFactory = SSLFactory.builder().withUnsafeTrustMaterial().withUnsafeHostnameVerifier().build();
+    public void useUsernameAndPasswordHttps() throws IOException, InterruptedException {
 
         RestClientBuilder builder = RestClient.builder(new HttpHost("localhost", 9200, "https"));
 
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("elastic", "ilxw@19841201"));
 
+        SSLFactory sslFactory = SSLFactory.builder().withUnsafeTrustMaterial().withUnsafeHostnameVerifier().build();
         builder = builder.setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider).setSSLContext(sslFactory.getSslContext()).setSSLHostnameVerifier(sslFactory.getHostnameVerifier()));
 
         RestClient restClient = builder.build();
@@ -42,20 +50,64 @@ public class ElasticsearchOrderUnitTest {
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
 
         // And create the API client
-        ElasticsearchClient esClient = new ElasticsearchClient(transport);
+        esClient = new ElasticsearchClient(transport);
         // ElasticsearchAsyncClient  asyncClient = new ElasticsearchAsyncClient(transport);
         // Index data to an index products
 
-        ProductPo product = new ProductPo("abc", "Bag", 42);
+        // 创建索引
+        {
+            ProductPo product = new ProductPo(1, "Bag", 42);
 
-        IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("products").id("abc").document(product).build();
+            IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("products").id(String.valueOf(product.getId())).document(product).build();
 
-        esClient.index(indexRequest);
+            IndexResponse response = esClient.index(indexRequest);
 
-        ProductPo product1 = new ProductPo("efg", "Bag", 42);
+            System.out.println("Indexed with version " + response.version());
+        }
 
-        esClient.index(builder2 -> builder2.index("products").id(product1.getId()).document(product1));
+        // 查询文档
+        {
+            GetResponse<ProductPo> response = esClient.get(g -> g.index("products").id(String.valueOf(1)), ProductPo.class);
 
+            if (response.found()) {
+                ProductPo product = response.source();
+                System.out.println("Product name " + product.getName());
+            } else {
+                System.out.println("Product not found");
+            }
+        }
+
+        Thread.sleep(1000);
+        // 修改文档
+        {
+            Map<String, Object> doc = new HashMap<String, Object>();
+            doc.put("name", "my bike");
+          // doc.put("price", 100);
+
+            BulkOperation op = new BulkOperation.Builder().update(i -> i.action(new UpdateAction.Builder<>().doc(doc).docAsUpsert(true).build()).id("1")).build();
+
+            List<BulkOperation> list = Collections.singletonList(op);
+
+            BulkResponse response = esClient.bulk(bulkBuilder -> bulkBuilder.index("products").operations(list));
+        }
+
+        // 模糊查询
+        {
+
+            String searchText = "bike";
+
+            SearchResponse<ProductPo> response = esClient.search(s -> s
+                            .index("products")
+                            .query(q -> q
+                                    .match(t -> t
+                                            .field("name")
+                                            .query(searchText)
+                                    )
+                            ),
+                    ProductPo.class
+            );
+            System.out.println(response);
+        }
     }
 
     @Test
@@ -77,7 +129,7 @@ public class ElasticsearchOrderUnitTest {
         // ElasticsearchAsyncClient  asyncClient = new ElasticsearchAsyncClient(transport);
         // Index data to an index products
 
-        ProductPo product = new ProductPo("abc", "Bagnew", 42);
+        ProductPo product = new ProductPo(2, "Bagnew", 42);
 
         IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("products").id("abc").document(product).build();
 
