@@ -81,12 +81,14 @@
             <artifactId>elasticsearch-rest-client</artifactId>
             <version>8.9.0</version>
         </dependency>
+
+        <!-- 测试 canal 同步到 ES 集群 end  -->
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- 测试 canal 同步到 ES 集群 end  -->
 
     </dependencies>
 
