@@ -13,6 +13,8 @@ public interface PointsMapper {
 
     PointsPO getById(Long id);
 
+    PointsPO getByOrderId(Long id);
+
     void update(PointsPO order);
 
     void delete(Long id);

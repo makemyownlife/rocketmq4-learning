@@ -23,6 +23,12 @@
         WHERE id = #{id}
     </select>
 
+    <select id="getByOrderId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+         SELECT id, user_id, order_id, points, remarks, create_time
+        FROM t_points
+        WHERE order_id = #{orderId}
+    </select>
+
     <update id="update" parameterType="com.courage.rocketmq4.domain.po.PointsPO">
         UPDATE t_points
         SET user_id = #{userId}, order_id = #{orderId}, points = #{points}, remarks = #{remarks}, create_time = #{createTime}

@@ -37,7 +37,7 @@ public class OrderPointMessageListener implements MessageListenerConcurrently {
                 logger.info("orderJSON:" + orderJSON);
                 OrderPO orderPO = JSON.parseObject(orderJSON, OrderPO.class);
                 // 首先查询是否处理完成
-                PointsPO pointsPO = pointsMapper.getById(orderPO.getId());
+                PointsPO pointsPO = pointsMapper.getByOrderId(orderPO.getId());
                 if (pointsPO == null) {
                     Long id = SnowFlakeIdGenerator.getUniqueId(1023, 0);
                     pointsPO = new PointsPO();
