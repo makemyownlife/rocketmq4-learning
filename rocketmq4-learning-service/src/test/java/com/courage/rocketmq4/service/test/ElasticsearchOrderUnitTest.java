@@ -4,7 +4,6 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.bulk.UpdateAction;
-import co.elastic.clients.elasticsearch.indices.DeleteIndexRequest;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -22,10 +21,7 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhangyong on 2023/8/15.
@@ -57,9 +53,9 @@ public class ElasticsearchOrderUnitTest {
 
         // 创建索引
         {
-            ProductPo product = new ProductPo(1, "Bag", 42);
+            ProductPo product = new ProductPo(1, "Bag", 12.12, 0, new Date(), new Date());
 
-            IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("products").id(String.valueOf(product.getId())).document(product).build();
+            IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("t_product").id(String.valueOf(product.getId())).document(product).build();
 
             IndexResponse response = esClient.index(indexRequest);
 
@@ -68,7 +64,7 @@ public class ElasticsearchOrderUnitTest {
 
         // 查询文档
         {
-            GetResponse<ProductPo> response = esClient.get(g -> g.index("products").id(String.valueOf(1)), ProductPo.class);
+            GetResponse<ProductPo> response = esClient.get(g -> g.index("t_product").id(String.valueOf(1)), ProductPo.class);
 
             if (response.found()) {
                 ProductPo product = response.source();
@@ -78,18 +74,18 @@ public class ElasticsearchOrderUnitTest {
             }
         }
 
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         // 修改文档
         {
             Map<String, Object> doc = new HashMap<String, Object>();
             doc.put("name", "my bike");
-          // doc.put("price", 100);
+             doc.put("updateTime", new Date());
 
             BulkOperation op = new BulkOperation.Builder().update(i -> i.action(new UpdateAction.Builder<>().doc(doc).docAsUpsert(true).build()).id("1")).build();
 
             List<BulkOperation> list = Collections.singletonList(op);
 
-            BulkResponse response = esClient.bulk(bulkBuilder -> bulkBuilder.index("products").operations(list));
+            BulkResponse response = esClient.bulk(bulkBuilder -> bulkBuilder.index("t_product").operations(list));
         }
 
         // 模糊查询
@@ -97,22 +93,13 @@ public class ElasticsearchOrderUnitTest {
 
             String searchText = "bike";
 
-            SearchResponse<ProductPo> response = esClient.search(s -> s
-                            .index("products")
-                            .query(q -> q
-                                    .match(t -> t
-                                            .field("name")
-                                            .query(searchText)
-                                    )
-                            ),
-                    ProductPo.class
-            );
+            SearchResponse<ProductPo> response = esClient.search(s -> s.index("t_product").query(q -> q.match(t -> t.field("name").query(searchText))), ProductPo.class);
             System.out.println(response);
         }
 
         // 删除文档
         {
-          //  esClient.delete(d -> d.index("products").id("1"));
+            //  esClient.delete(d -> d.index("products").id("1"));
         }
     }
 
@@ -135,7 +122,7 @@ public class ElasticsearchOrderUnitTest {
         // ElasticsearchAsyncClient  asyncClient = new ElasticsearchAsyncClient(transport);
         // Index data to an index products
 
-        ProductPo product = new ProductPo(2, "Bagnew", 42);
+        ProductPo product = new ProductPo(2, "Bagnew", 42.1, 1, new Date(), new Date());
 
         IndexRequest<Object> indexRequest = new IndexRequest.Builder<>().index("products").id("abc").document(product).build();
 

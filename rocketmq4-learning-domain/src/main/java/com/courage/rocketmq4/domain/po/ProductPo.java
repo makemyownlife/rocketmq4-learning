@@ -1,5 +1,7 @@
 package com.courage.rocketmq4.domain.po;
 
+import java.util.Date;
+
 /**
  * Created by zhangyong on 2023/8/15.
  */
@@ -9,16 +11,25 @@ public class ProductPo {
 
     private String name;
 
-    private int price;
+    private Double price;
+
+    private Integer status;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public ProductPo() {
 
     }
 
-    public ProductPo(Integer id, String name, int price) {
+    public ProductPo(Integer id, String name, Double price, Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.status = status;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     public Integer getId() {
@@ -29,10 +40,6 @@ public class ProductPo {
         return name;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -41,13 +48,37 @@ public class ProductPo {
         this.name = name;
     }
 
-    public void setPrice(int price) {
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", price=" + price + '}';
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
 }
