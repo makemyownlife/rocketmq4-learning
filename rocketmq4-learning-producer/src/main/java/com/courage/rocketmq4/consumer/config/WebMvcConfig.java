@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.producer.config;
+package com.courage.rocketmq4.consumer.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

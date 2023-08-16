@@ -2,12 +2,12 @@ spring:
   profiles:
     active: test
   application:
-    name: rocketmq4-learning-producer
+    name: rocketmq4-learning-consumer
 
 server:
   port: 8080
   servlet:
-    context-path: /rocketmq4-learning-producer
+    context-path: /rocketmq4-learning-consumer
 
 pagehelper:
   supportMethodsArguments: true

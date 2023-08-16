@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.producer.controller;
+package com.courage.rocketmq4.consumer.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.courage.rocketmq4.common.result.ResponseEntity;

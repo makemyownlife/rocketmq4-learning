@@ -1,4 +1,4 @@
-package com.courage.rocketmq4.producer.rocketmq;
+package com.courage.rocketmq4.consumer.rocketmq;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
