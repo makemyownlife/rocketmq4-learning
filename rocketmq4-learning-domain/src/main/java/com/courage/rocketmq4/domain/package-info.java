@@ -1,1 +1,0 @@
-package com.courage.rocketmq4.domain;
