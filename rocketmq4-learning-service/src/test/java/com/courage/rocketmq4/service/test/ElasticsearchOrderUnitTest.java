@@ -4,6 +4,7 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import co.elastic.clients.elasticsearch.core.bulk.UpdateAction;
+import co.elastic.clients.elasticsearch.indices.DeleteIndexRequest;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
@@ -107,6 +108,11 @@ public class ElasticsearchOrderUnitTest {
                     ProductPo.class
             );
             System.out.println(response);
+        }
+
+        // 删除文档
+        {
+          //  esClient.delete(d -> d.index("products").id("1"));
         }
     }
 
