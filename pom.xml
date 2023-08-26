@@ -21,6 +21,8 @@
     <properties>
         <springboot.version>2.3.8.RELEASE</springboot.version>
         <fastjson.version>1.2.75</fastjson.version>
+        <jakartajson.version>2.0.1</jakartajson.version>
+        <org.elasticsearch.client>8.9.0</org.elasticsearch.client>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
@@ -28,6 +30,19 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <dependency>
+                <groupId>jakarta.json</groupId>
+                <artifactId>jakarta.json-api</artifactId>
+                <version>${jakartajson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>8.9.0</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
