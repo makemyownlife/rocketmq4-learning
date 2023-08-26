@@ -31,6 +31,7 @@
 
         <dependencies>
 
+            <!-- 放在上面，防止版本不一致，导致 es client 启动失败  -->
             <dependency>
                 <groupId>jakarta.json</groupId>
                 <artifactId>jakarta.json-api</artifactId>
