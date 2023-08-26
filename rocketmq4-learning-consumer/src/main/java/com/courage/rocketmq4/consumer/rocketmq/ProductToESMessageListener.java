@@ -34,11 +34,20 @@ public class ProductToESMessageListener implements MessageListenerOrderly {
                 logger.info("data:" + data);
                 JSONObject json = JSON.parseObject(data);
                 String dataNode = json.getString("data");
-                List<ProductPo> productPoList = JSON.parseArray(dataNode , ProductPo.class);
-                System.out.println(productPoList);
+                String type = json.getString("type");
+                List<ProductPo> productPoList = JSON.parseArray(dataNode, ProductPo.class);
+                for (ProductPo product : productPoList) {
+                    if ("UPDATE".equals(type) || "INSERT".equals(type)) {
+                        productIndexService.saveProduct(product);
+                    }
+                    if("DELETE".equals(type)) {
+                        productIndexService.deleteProduct(product.getId());
+                    }
+                }
             }
         } catch (Exception e) {
             logger.error("consumeMessage error: ", e);
+            return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
         }
         return ConsumeOrderlyStatus.SUCCESS;
     }

@@ -34,4 +34,8 @@ public class ProductIndexService {
         logger.info("response:" + response);
     }
 
+    public void deleteProduct(Integer id) throws Exception {
+        elasticsearchClient.delete(d -> d.index("t_product").id(String.valueOf(id)));
+    }
+
 }
